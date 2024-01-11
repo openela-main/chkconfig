@@ -1,8 +1,8 @@
 Summary: A system tool for maintaining the /etc/rc*.d hierarchy
 Name: chkconfig
-Version: 1.20
-Release: 2%{?dist}
-License: GPLv2
+Version: 1.24
+Release: 1%{?dist}
+License: GPL-2.0-only
 URL: https://github.com/fedora-sysv/chkconfig
 Source: https://github.com/fedora-sysv/chkconfig/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 BuildRequires: newt-devel gettext popt-devel libselinux-devel beakerlib gcc systemd-devel make
@@ -88,9 +88,80 @@ mkdir -p $RPM_BUILD_ROOT/etc/chkconfig.d
 %dir /var/lib/alternatives
 
 %changelog
-* Mon Aug 09 2021 Mohan Boddu <mboddu@redhat.com> - 1.20-2
-- Rebuilt for IMA sigs, glibc 2.34, aarch64 flags
-  Related: rhbz#1991688
+* Thu May 04 2023 Jan Macku <jamacku@redhat.com> - 1.24-1
+- ci: fix `NEXT_VERSION` in Makefile
+- revert: releng: Enable Packit to handle Fedora updates
+- revert: releng: Convert to rpmautospec
+
+* Thu May 04 2023 Jan Macku <jamacku@redhat.com> - 1.23-1
+- Translated using Weblate (Korean)
+- Translated using Weblate (English (United Kingdom))
+- alternatives: --keep-foreign incorrectly handles non-existent files
+- alternatives: isLink should return 0 in case of lstat error
+- Translated using Weblate (Swedish)
+- Translated using Weblate (Korean)
+- Translated using Weblate (Georgian)
+- Translated using Weblate (Finnish)
+- Translated using Weblate (Ukrainian)
+- Translated using Weblate (Polish)
+- Update translation files
+- Translated using Weblate (German)
+- doc: update translations
+- spec: remote changelog
+
+* Thu Mar 23 2023 Jan Macku <jamacku@redhat.com> - 1.22-1
+- migrate to SPDX license
+- Translated using Weblate (English (United Kingdom))
+- Translated using Weblate (Japanese)
+- ci: Add locale linter
+- ci: update workflows
+- test: fix ShellCheck error[SC2070]
+- Bump redhat-plumbers-in-action/differential-shellcheck from 3 to 4 (#94)
+- releng: Packit remove extra job trigger
+- releng: Enable Packit to handle Fedora updates
+- releng: Convert to rpmautospec
+
+* Wed Oct 05 2022 Jan Macku <jamacku@redhat.com> - 1.21-1
+- ci: Add CodeQL to replace LGTM
+- alternatives: replace master/slave with leader/follower
+- chkconfig: use correct cmp function
+- Bump redhat-plumbers-in-action/differential-shellcheck from 2 to 3
+- ci: Add Shell linter - Differential ShellCheck
+- ci: Use more inclusive terminology in workflows
+- ci: Update workflows, packit and dependabot
+- Translated using Weblate (Friulian)
+- Translated using Weblate (Swedish)
+- Translated using Weblate (Estonian)
+- Translated using Weblate (Georgian)
+- Translated using Weblate (Polish)
+- Translated using Weblate (Korean)
+- Translated using Weblate (Czech)
+- Translations update from Fedora Weblate (#77)
+- Translations update from Fedora Weblate (#75)
+- Translations update from Fedora Weblate (#74)
+- Translations update from Fedora Weblate (#73)
+- Translated using Weblate (Ukrainian)
+- Update translation files
+- Family mentioned for --set in both man and help
+- Translated using Weblate (French)
+- build-sys: Ensure `systemd-sysv-install` symlink does not have `//`
+- Translated using Weblate (German)
+- Add LGTM badges to README
+- Merge remote-tracking branch 'weblate/master'
+- Translated using Weblate (Indonesian)
+- Translated using Weblate (Finnish)
+- Translated using Weblate (Korean)
+- Translated using Weblate (Ukrainian)
+- Translated using Weblate (Turkish)
+- Translated using Weblate (Polish)
+- Translated using Weblate (Norwegian Nynorsk)
+- Update translation files
+- Translated using Weblate (Finnish)
+- Translated using Weblate (Czech)
+- Translated using Weblate (Swedish)
+- Translated using Weblate (Italian)
+- Translated using Weblate (Spanish)
+- Translated using Weblate (Chinese (Simplified))
 
 * Wed Jul 28 2021 Jan Macku <jamacku@redhat.com> - 1.20-1
 - spec: Replace not working awk command with sed (#62)
@@ -114,12 +185,6 @@ mkdir -p $RPM_BUILD_ROOT/etc/chkconfig.d
 - CI: specify more closely when to run CI
 - Add basic CI and README
 - spec: sync specfile with Fedora
-
-* Thu Apr 15 2021 Mohan Boddu <mboddu@redhat.com> - 1.15-3
-- Rebuilt for RHEL 9 BETA on Apr 15th 2021. Related: rhbz#1947937
-
-* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.15-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
 * Thu Jan 21 2021 Jan Macku <jamacku@redhat.com> - 1.15-1
 - spec: sync specfile with Fedora
@@ -328,7 +393,7 @@ mkdir -p $RPM_BUILD_ROOT/etc/chkconfig.d
 - translation updates: as, bg, bn_IN, bs, ca, de, fr, hi, hu, id, ja,
   ka, ml, ms, nb, or, sk, sl
 - add resetpriorities to the man page (#197399)
-  
+
 * Tue Feb  6 2007 Bill Nottingham <notting@redhat.com> 1.3.33-1
 - various changes from review - support alternate %%{_sbindir}, fix
   summaries, add version to requires, assorted other bits

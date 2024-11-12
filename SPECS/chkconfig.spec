@@ -1,10 +1,13 @@
 Summary: A system tool for maintaining the /etc/rc*.d hierarchy
 Name: chkconfig
 Version: 1.24
-Release: 1%{?dist}
+Release: 1%{?dist}.1
 License: GPL-2.0-only
 URL: https://github.com/fedora-sysv/chkconfig
 Source: https://github.com/fedora-sysv/chkconfig/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+
+Patch001: 001-ostree-move-admindir-to-etc-alternatives.admindir.patch
+
 BuildRequires: newt-devel gettext popt-devel libselinux-devel beakerlib gcc systemd-devel make
 Conflicts: initscripts <= 5.30-1
 
@@ -13,7 +16,7 @@ Provides: /sbin/chkconfig
 %description
 Chkconfig is a basic system utility.  It updates and queries runlevel
 information for system services.  Chkconfig manipulates the numerous
-symbolic links in /etc/rc.d, to relieve system administrators of some 
+symbolic links in /etc/rc.d, to relieve system administrators of some
 of the drudgery of manually editing the symbolic links.
 
 %package -n ntsysv
@@ -37,7 +40,7 @@ programs fulfilling the same or similar functions to be installed on a single
 system at the same time.
 
 %prep
-%setup -q
+%autosetup
 
 %build
 %make_build RPM_OPT_FLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
@@ -81,13 +84,17 @@ mkdir -p $RPM_BUILD_ROOT/etc/chkconfig.d
 %files -n alternatives
 %license COPYING
 %dir /etc/alternatives
+%ghost %dir %attr(755, root, root) /etc/alternatives.admindir
+%ghost %dir %attr(755, root, root) /var/lib/alternatives
 %{_sbindir}/update-alternatives
 %{_sbindir}/alternatives
 %{_mandir}/*/update-alternatives*
 %{_mandir}/*/alternatives*
-%dir /var/lib/alternatives
 
 %changelog
+* Wed Sep 04 2024 Jan Macku <jamacku@redhat.com> - 1.24-1.1
+- ostree: move admindir to /etc/alternatives.admindir (RHEL-53997)
+
 * Thu May 04 2023 Jan Macku <jamacku@redhat.com> - 1.24-1
 - ci: fix `NEXT_VERSION` in Makefile
 - revert: releng: Enable Packit to handle Fedora updates
